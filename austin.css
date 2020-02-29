@@ -3,7 +3,7 @@ html {
 }
 
 h1 {
-  color: brown;
+  color: darkblue;
   font-weight: bold;
   font-size: 40px;
   line-height: 2.5;
@@ -18,11 +18,12 @@ ul {
 }
 footer {
   text-align: center;
+  position: fixed;
   bottom: 10%;
 }
 img {
   width: 40%;
   right: 4em;
-  top: 12em;
+  top: 10em;
   position: fixed;
 }
