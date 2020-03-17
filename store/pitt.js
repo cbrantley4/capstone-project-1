@@ -1,4 +1,4 @@
 export default {
   header: "Pittsburgh, PA",
-  view: "Pittsburgh"
+  view: "Pitt"
 };

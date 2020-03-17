@@ -1,6 +1,7 @@
-export { default as austin } from "./austin";
-export { default as contact } from "./contact";
+export { default as Austin } from "./Austin";
+export { default as Contact } from "./Contact";
 export { default as Home } from "./Home";
-export { default as latLong } from "./latLong";
-export { default as pitt } from "./pitt";
-export { default as stl } from "./stl";
+export { default as LatLong } from "./LatLong";
+export { default as Pitt } from "./Pitt";
+export { default as Stl } from "./Stl";
+export { default as Links } from "./Links"
