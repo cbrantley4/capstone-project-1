@@ -1,8 +1,8 @@
 export default [
   { title: "Home", text: "Home" },
-  { title: "stl", text: "stl" },
-  { title: "austin", text: "austin" },
-  { title: "pitt", text: "pitt" },
-  { title: "latLong", text: "latLong" },
-  { title: "contact", text: "contact" }
+  { title: "Stl", text: "stl" },
+  { title: "Austin", text: "austin" },
+  { title: "Pitt", text: "pitt" },
+  { title: "LatLong", text: "latLong" },
+  { title: "Contact", text: "contact" }
 ];
