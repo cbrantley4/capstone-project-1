@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "serve": "browser-sync start --server --files '*.html, *.css, *.js'"
+    "serve": "parcel index.html",
+    "parcel-build": "parcel build index.html && cp _redirects ./dist/"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "browser-sync": "^2.26.7",
+    "parcel-bundler": "^1.12.4",
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-prettier": "^3.1.1",

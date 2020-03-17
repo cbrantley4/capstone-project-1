@@ -1,28 +1,112 @@
 html {
-  background-color: gray;
+  background-color: lightgrey;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 0;
+}
+nav:hover {
+  text-emphasis: red;
 }
 
-h1 {
-  color: brown;
-  font-weight: bold;
-  font-size: 40px;
-  line-height: 2.5;
-  text-align: center;
+section {
+  width: 100%;
+  height: 1000px;
+  float: left;
 }
-ul {
-  line-height: 3;
+
+header {
+  color: Green;
+  font-weight: bold;
+  text-align: center;
+  font-size: 40px;
+}
+#PageB h1 {
+  color: Green;
+  font-weight: bold;
+  text-align: center;
+  font-size: 40px;
+}
+#PageC h1 {
+  color: Blue;
+  font-weight: bold;
+  text-align: center;
+  font-size: 40px;
+}
+#PageD h1 {
+  color: Red;
+  font-weight: bold;
+  text-align: center;
+  font-size: 40px;
+}
+#PageE h1 {
+  color: Black;
+  font-weight: bold;
+  text-align: center;
+  font-size: 40px;
+}
+#PageF h1 {
+  color: black;
+  font-weight: bold;
+  text-align: center;
+  font-size: 40px;
+}
+
+p {
+  text-align: left;
   width: 40%;
+}
+
+img {
+  float: right;
+  width: 40%;
+  vertical-align: text-top;
+  padding: 40px;
+}
+
+#PageF img {
+  float: left;
+  width: 20%;
+  height: 30%;
+}
+
+#PageE img {
+  float: left;
+  width: 20%;
+  height: 30%;
+}
+
+ul {
+  line-height: 4;
+  width: 100%;
   text-align: left;
   font-weight: bold;
   font-size: 20px;
+  padding-left: 5%;
+  color: black;
 }
+
 footer {
   text-align: center;
-  bottom: 10%;
+  font-weight: bold;
+  vertical-align: baseline;
 }
-img {
-  width: 40%;
-  right: 4em;
-  top: 12em;
-  position: fixed;
+
+label,
+textarea {
+  color: Black;
+  vertical-align: text-top;
+}
+
+textarea {
+  color: Black;
+  resize: none;
+  border-radius: 2px;
+  border: solid;
+  float: right;
+  font-size: 20px;
+}
+
+button {
+  font-size: 30px;
+  float: right;
+  vertical-align: text-bottom;
 }
