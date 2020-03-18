@@ -1,4 +1,4 @@
 export default {
-  header: "Use Lat and Long",
+  header: "Find a Trail",
   view: "LatLong"
 };

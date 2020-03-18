@@ -10,7 +10,6 @@ nav:hover {
 section {
   width: 100%;
   height: 1000px;
-  float: left;
 }
 
 header {
@@ -19,6 +18,12 @@ header {
   text-align: center;
   font-size: 40px;
 }
+
+#PageA p {
+  color: black;
+  text-align: left;
+}
+
 #PageB h1 {
   color: Green;
   font-weight: bold;
@@ -81,7 +86,6 @@ ul {
   font-weight: bold;
   font-size: 20px;
   padding-left: 5%;
-  color: black;
 }
 
 footer {

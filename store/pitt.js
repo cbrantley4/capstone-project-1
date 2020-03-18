@@ -1,4 +1,4 @@
 export default {
-  header: "Pittsburgh, PA",
+  header: "Find a Trail",
   view: "Pitt"
 };

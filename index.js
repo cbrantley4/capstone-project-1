@@ -1,5 +1,19 @@
 import { Header, Nav, Main, Footer } from "./components";
 import * as state from "./store";
+import Navigo from "navigo";
+import { capitalize } from "lodash";
+
+const router = new Navigo(window.location.origin);
+
+router
+  .on({
+    "/": () => render(state.Home),
+    ":page": params => {
+      let page = capitalize(params.page);
+      render(state[page]);
+    }
+  })
+  .resolve();
 
 function render(st = state.Home) {
   document.querySelector("#root").innerHTML = `
@@ -8,6 +22,9 @@ function render(st = state.Home) {
   ${Main(st)}
   ${Footer()}
 `;
+
+  router.updatePageLinks();
+
   addNavEventListeners();
   addPicOnFormSubmit(st);
 }

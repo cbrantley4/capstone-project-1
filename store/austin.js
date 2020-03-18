@@ -1,4 +1,4 @@
 export default {
-  header: "Austin, TX",
+  header: "Find a Trail",
   view: "Austin"
 };

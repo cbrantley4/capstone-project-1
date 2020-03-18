@@ -1,4 +1,4 @@
 export default {
-  header: "Contact Me",
+  header: "Find a Trail",
   view: "Contact"
 };
