@@ -80,12 +80,13 @@ img {
 }
 
 ul {
-  line-height: 4;
+  line-height: 2;
   width: 100%;
   text-align: left;
   font-weight: bold;
   font-size: 20px;
   padding-left: 5%;
+  list-style: none;
 }
 
 footer {
