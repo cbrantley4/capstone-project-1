@@ -4,18 +4,18 @@ import Navigo from "navigo";
 import { capitalize } from "lodash";
 import axios from "axios";
 
-axios
-  .get("https://jsonplaceholder.typicode.com/posts")
-  .then(response => {
-    response.data.forEach(post => {
-      state.Blog.posts.push(post);
-    });
-    const params = router.lastRouteResolved().params;
-    if (params) {
-      render(state[params.page]);
-    }
-  })
-  .catch(err => console.log(err));
+// axios
+//   .get("https://jsonplaceholder.typicode.com/posts")
+//   .then(response => {
+//     response.data.forEach(post => {
+//       state.Blog.posts.push(post);
+//     });
+//     const params = router.lastRouteResolved().params;
+//     if (params) {
+//       render(state[params.page]);
+//     }
+//   })
+//   .catch(err => console.log(err));
 
 const router = new Navigo(window.location.origin);
 
