@@ -64,6 +64,10 @@ header {
   font-size: 40px;
 }
 
+#PageF div {
+  clear: both;
+}
+
 img {
   width: 50%;
   align-content: center;
@@ -75,12 +79,11 @@ img {
   float: left;
   width: 20%;
   height: 30%;
+  padding-bottom: 2rem;
 }
 
-#PageE img {
-  float: left;
-  width: 20%;
-  height: 30%;
+#PageF p {
+  font-size: 30px;
 }
 
 footer {
@@ -88,6 +91,7 @@ footer {
   font-weight: bold;
   vertical-align: baseline;
   color: darkgray;
+  clear: both;
 }
 
 label,
@@ -100,8 +104,8 @@ textarea {
   color: Black;
   resize: none;
   border-radius: 2px;
-  border: solid;
-  float: right;
+  border: solid 4px;
+  float: left;
   font-size: 20px;
 }
 

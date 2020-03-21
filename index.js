@@ -46,13 +46,6 @@ function render(st = state.Home) {
 render();
 
 function addNavEventListeners() {
-  // add event listeners to Nav items for navigation
-  document.querySelectorAll("nav a").forEach(navLink =>
-    navLink.addEventListener("click", event => {
-      event.preventDefault();
-      render(state[event.target.title]);
-    })
-  );
   // add menu toggle to bars icon in nav bar
   document
     .querySelector(".fa-bars")

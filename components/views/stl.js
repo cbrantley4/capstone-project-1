@@ -1,7 +1,6 @@
 export default () =>
   `
 <section id="PageB">
-  <h1>St. Louis, MO</h1>
       <nav>
         <img src = "https://images.unsplash.com/photo-1501185414752-195412ae7696?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80">
         <ul>
@@ -12,5 +11,4 @@ export default () =>
           <li><a href = "#PageA">Home</a></li>
         </ul>
       </nav>
-  <footer><a href= "#PageF">Contact Me</a></footer>
 </section>`;
