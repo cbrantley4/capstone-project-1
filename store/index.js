@@ -5,4 +5,6 @@ export { default as Pitt } from "./Pitt";
 export { default as Stl } from "./Stl";
 export { default as Links } from "./Links";
 export { default as Newcity } from "./Newcity";
-// export { default as Blog } from "./Blog";
+export { default as Boulder } from "./Boulder";
+export { default as Sanfran } from "./Sanfran";
+export { default as Baltimore } from "./Baltimore";

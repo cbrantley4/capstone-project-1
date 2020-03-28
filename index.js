@@ -4,18 +4,32 @@ import Navigo from "navigo";
 import { capitalize } from "lodash";
 import axios from "axios";
 
-// axios
-//   .get("https://jsonplaceholder.typicode.com/posts")
-//   .then(response => {
-//     response.data.forEach(post => {
-//       state.Blog.posts.push(post);
-//     });
-//     const params = router.lastRouteResolved().params;
-//     if (params) {
-//       render(state[params.page]);
-//     }
-//   })
-//   .catch(err => console.log(err));
+axios
+  .get(
+    "https://www.hikingproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=10&key=200694459-1bf8c15cf29b86d2f3fe98cac63412d3"
+  )
+  .then(response =>
+    response.data.trails.forEach(trail => state.Boulder.trails.push(trail))
+  )
+  .catch(err => console.log(err));
+
+axios
+  .get(
+    "https://www.hikingproject.com/data/get-trails?lat=37.775592&lon=-122.417004&maxDistance=10&key=200694459-1bf8c15cf29b86d2f3fe98cac63412d3"
+  )
+  .then(response =>
+    response.data.trails.forEach(trail => state.Sanfran.trails.push(trail))
+  )
+  .catch(err => console.log(err));
+
+axios
+  .get(
+    "https://www.hikingproject.com/data/get-trails?lat=39.293126&lon=-76.615702&maxDistance=10&key=200694459-1bf8c15cf29b86d2f3fe98cac63412d3"
+  )
+  .then(response =>
+    response.data.trails.forEach(trail => state.Baltimore.trails.push(trail))
+  )
+  .catch(err => console.log(err));
 
 const router = new Navigo(window.location.origin);
 
@@ -40,7 +54,9 @@ function render(st = state.Home) {
   router.updatePageLinks();
 
   addNavEventListeners();
-  addPicOnFormSubmit(st);
+  listenForBoulderClick(st);
+  listenForSanfranClick(st);
+  listenForBaltimoreClick(st);
 }
 
 render();
@@ -54,22 +70,31 @@ function addNavEventListeners() {
     );
 }
 
-function addPicOnFormSubmit(st) {
-  if (st.view === "Form") {
-    document.querySelector("form").addEventListener("submit", event => {
+function listenForBoulderClick(st) {
+  if (st.view === "Newcity") {
+    document.querySelector("#boulder-link").addEventListener("click", event => {
       event.preventDefault();
-      // convert HTML elements to Array
-      let inputList = Array.from(event.target.elements);
-      // remove submit button from list
-      inputList.pop();
-      // construct new picture object
-      let newPic = inputList.reduce((pictureObject, input) => {
-        pictureObject[input.name] = input.value;
-        return pictureObject;
-      }, {});
-      // add new picture to state.Gallery.pictures
-      state.Gallery.pictures.push(newPic);
-      render(state.Gallery);
+      render(state.Boulder);
     });
+  }
+}
+
+function listenForSanfranClick(st) {
+  if (st.view === "Newcity") {
+    document.querySelector("#sanfran-link").addEventListener("click", event => {
+      event.preventDefault();
+      render(state.Sanfran);
+    });
+  }
+}
+
+function listenForBaltimoreClick(st) {
+  if (st.view === "Newcity") {
+    document
+      .querySelector("#baltimore-link")
+      .addEventListener("click", event => {
+        event.preventDefault();
+        render(state.Baltimore);
+      });
   }
 }
