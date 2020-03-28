@@ -8,7 +8,6 @@ export default () =>
           <li><a href="https://www.alltrails.com/trail/us/texas/mayfield-park-lake-trail" target ="_blank">0.3 miles</a></li>
           <li><a href="https://www.alltrails.com/trail/us/texas/lady-bird-lake-trail" target ="_blank">10 miles</a></li>
           <li><a href="https://www.alltrails.com/trail/us/texas/mount-bonnell-trail" target="_blank">0.5 miles</a></li>
-          <li><a href = "#PageA">Home</a></li>
         </ul>
     </nav>
 </section>`;

@@ -10,7 +10,7 @@ nav:hover {
 
 nav > ul {
   line-height: 2;
-  width: 100%;
+  width: 90%;
   text-align: left;
   font-weight: bold;
   font-size: 20px;
@@ -56,6 +56,13 @@ header {
   font-weight: bold;
   text-align: center;
   font-size: 40px;
+}
+#PageE > ul {
+  list-style: none;
+  display: inline-flex;
+  justify-content: space-between;
+  text-align: center;
+  width: 90%;
 }
 #PageF h1 {
   color: black;

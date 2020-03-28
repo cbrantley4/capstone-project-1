@@ -8,7 +8,6 @@ export default () =>
           <li><a href="https://www.alltrails.com/trail/us/missouri/forest-park-heels-path" target="_blank">5.8 miles</a></li>
           <li><a href="https://www.alltrails.com/trail/us/missouri/francis-park-loop" target="_blank">1.9 miles</a></li>
           <li><a href="https://www.alltrails.com/trail/us/missouri/saint-louis-tower-grove-park-tour" target="_blank">3.2 miles</a></li>
-          <li><a href = "#PageA">Home</a></li>
         </ul>
       </nav>
 </section>`;

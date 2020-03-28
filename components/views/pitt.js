@@ -8,7 +8,6 @@ export default () =>
           <li><a href="https://www.alltrails.com/trail/us/pennsylvania/frick-park-tour-loop-trail" target="_blank">4.9 miles</a></li>
           <li><a href="https://www.alltrails.com/trail/us/pennsylvania/schenley-park-double-loop" target="_blank">5 miles</a></li>
           <li><a href="https://www.alltrails.com/trail/us/pennsylvania/riverwalk-point-state-park-waterfront" target="_blank">2.8 miles</a></li>
-          <li><a href = "#PageA">Home</a></li>
         </ul>
       </nav>
 </section>`;
