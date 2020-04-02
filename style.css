@@ -111,17 +111,22 @@ button {
   padding-right: 20rem;
 }
 
-#Boulder ul {
+#Boulder ol {
   width: 90%;
   font-size: 30px;
+  justify-content: center;
+  list-style: none;
+}
+#Baltimore ol {
+  width: 90%;
+  font-size: 30px;
+  justify-content: center;
+  list-style: none;
 }
 
-#Baltimore ul {
+#Sanfran ol {
   width: 90%;
-  font-size: 20px;
-}
-
-#Sanfran ul {
-  width: 90%;
-  font-size: 20px;
+  font-size: 30px;
+  justify-content: center;
+  list-style: none;
 }
