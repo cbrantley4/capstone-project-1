@@ -113,18 +113,15 @@ button {
 
 #Boulder ul {
   width: 90%;
-  justify-content: space-between;
-  font-size: 10px;
+  font-size: 30px;
 }
 
 #Baltimore ul {
   width: 90%;
-  justify-content: space-between;
-  font-size: 10px;
+  font-size: 20px;
 }
 
 #Sanfran ul {
   width: 90%;
-  justify-content: space-between;
-  font-size: 10px;
+  font-size: 20px;
 }
