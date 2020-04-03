@@ -4,5 +4,7 @@ export default [
   { title: "Austin", text: "Austin, TX" },
   { title: "Pitt", text: "Pittsburgh, PA" },
   { title: "Contact", text: "Contact" },
-  { title: "Newcity", text: "Search other Cities" }
+  { title: "Newcity", text: "Search other Cities" },
+  { title: "Register", text: "Register" },
+  { title: "Signin", text: "Sign In" }
 ];

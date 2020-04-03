@@ -130,3 +130,7 @@ button {
   justify-content: center;
   list-style: none;
 }
+
+#Register img {
+  height: 90%;
+}

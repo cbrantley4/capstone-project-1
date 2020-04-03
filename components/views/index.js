@@ -7,3 +7,5 @@ export { default as Newcity } from "./Newcity";
 export { default as Boulder } from "./Boulder";
 export { default as Sanfran } from "./Sanfran";
 export { default as Baltimore } from "./Baltimore";
+export { default as Signin } from "./Signin";
+export { default as Register } from "./Register";
