@@ -15,5 +15,4 @@ export default () => `
 
     <input type="submit" id="register-button" value="Register">
   </form>
-</section>
 `;
