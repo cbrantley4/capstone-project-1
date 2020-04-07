@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { Header, Nav, Main, Footer } from "./components";
 import * as state from "./store";
 import Navigo from "navigo";
@@ -10,25 +11,23 @@ const coll = db.collection("users");
 
 axios
   .get(
-    "https://www.hikingproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=10&key=200694459-1bf8c15cf29b86d2f3fe98cac63412d3"
+    `https://www.hikingproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=10&key=${process.env.REI_HIKING_API_KEY}`
   )
   .then(response =>
     response.data.trails.forEach(trail => state.Boulder.trails.push(trail))
   )
   .catch(err => console.log(err));
-
 axios
   .get(
-    "https://www.hikingproject.com/data/get-trails?lat=37.775592&lon=-122.417004&maxDistance=10&key=200694459-1bf8c15cf29b86d2f3fe98cac63412d3"
+    `https://www.hikingproject.com/data/get-trails?lat=37.775592&lon=-122.417004&maxDistance=10&key=${process.env.REI_HIKING_API_KEY}`
   )
   .then(response =>
     response.data.trails.forEach(trail => state.Sanfran.trails.push(trail))
   )
   .catch(err => console.log(err));
-
 axios
   .get(
-    "https://www.hikingproject.com/data/get-trails?lat=39.293126&lon=-76.615702&maxDistance=10&key=200694459-1bf8c15cf29b86d2f3fe98cac63412d3"
+    `https://www.hikingproject.com/data/get-trails?lat=39.293126&lon=-76.615702&maxDistance=10&key=${process.env.REI_HIKING_API_KEY}`
   )
   .then(response =>
     response.data.trails.forEach(trail => state.Baltimore.trails.push(trail))

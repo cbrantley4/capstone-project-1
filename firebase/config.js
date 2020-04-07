@@ -1,4 +1,3 @@
-import "../env";
 export default {
   apiKey: process.env.FIREBASE_API_KEY,
   authDomain: "find-a-trail-f6b4b.firebaseapp.com",
