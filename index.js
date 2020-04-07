@@ -39,10 +39,7 @@ const router = new Navigo(window.location.origin);
 router
   .on({
     "/": () => render(state.Home),
-    ":page": params => {
-      let page = capitalize(params.page);
-      render(state[page]);
-    }
+    ":page": params => render(state[capitalize(params.page)])
   })
   .resolve();
 
@@ -56,21 +53,9 @@ function render(st = state.Home) {
 
   router.updatePageLinks();
 
-  addNavEventListeners();
   listenForBoulderClick(st);
   listenForSanfranClick(st);
   listenForBaltimoreClick(st);
-}
-
-render();
-
-function addNavEventListeners() {
-  // add menu toggle to bars icon in nav bar
-  document
-    .querySelector(".fa-bars")
-    .addEventListener("click", () =>
-      document.querySelector("nav > ul").classList.toggle("hidden--mobile")
-    );
 }
 
 function listenForBoulderClick(st) {
@@ -123,7 +108,7 @@ function addLogInAndOutListener(user) {
         logOutUserInDb(user.email);
         resetUserInState();
         //update user in database
-        db.collection("users").get;
+        coll.get;
         render(state.Home);
       });
       console.log(state.User);
@@ -161,6 +146,15 @@ function listenForAuthChange() {
   auth.onAuthStateChanged(user => (user ? console.log(user) : ""));
 }
 
+function addNavEventListeners() {
+  // add menu toggle to bars icon in nav bar
+  document
+    .querySelector(".fa-bars")
+    .addEventListener("click", () =>
+      document.querySelector("nav > ul").classList.toggle("hidden--mobile")
+    );
+}
+
 function listenForRegister(st) {
   if (st.view === "Register") {
     document.querySelector("form").addEventListener("submit", event => {
@@ -193,7 +187,7 @@ function addUserToStateAndDb(first, last, email, pass) {
   state.User.email = email;
   state.User.loggedIn = true;
 
-  db.collection("users").add({
+  coll.add({
     firstName: first,
     lastName: last,
     email: email,
