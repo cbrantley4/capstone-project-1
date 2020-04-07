@@ -11,7 +11,7 @@ const coll = db.collection("users");
 
 axios
   .get(
-    `https://cors-anywhere.herokuapp.com/https://www.hikingproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=10&key=${process.env.REI_HIKING_API_KEY}`
+    `https://www.hikingproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=10&key=${process.env.REI_HIKING_API_KEY}`
   )
   .then(response =>
     response.data.trails.forEach(trail => state.Boulder.trails.push(trail))
