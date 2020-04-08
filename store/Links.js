@@ -6,5 +6,6 @@ export default [
   { title: "Contact", text: "Contact" },
   { title: "Newcity", text: "Search other Cities" },
   { title: "Register", text: "Register" },
-  { title: "Signin", text: "Sign In" }
+  { title: "Signin", text: "Sign In" },
+  { title: "Signout", text: "Sign Out" }
 ];

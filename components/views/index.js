@@ -9,3 +9,4 @@ export { default as Sanfran } from "./Sanfran";
 export { default as Baltimore } from "./Baltimore";
 export { default as Signin } from "./Signin";
 export { default as Register } from "./Register";
+export { default as Signout } from "./Signout";

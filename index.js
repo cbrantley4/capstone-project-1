@@ -9,30 +9,30 @@ import "./env";
 
 const coll = db.collection("users");
 
-axios
-  .get(
-    `https://www.hikingproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=10&key=${process.env.REI_HIKING_API_KEY}`
-  )
-  .then(response =>
-    response.data.trails.forEach(trail => state.Boulder.trails.push(trail))
-  )
-  .catch(err => console.log(err));
-axios
-  .get(
-    `https://www.hikingproject.com/data/get-trails?lat=37.775592&lon=-122.417004&maxDistance=10&key=${process.env.REI_HIKING_API_KEY}`
-  )
-  .then(response =>
-    response.data.trails.forEach(trail => state.Sanfran.trails.push(trail))
-  )
-  .catch(err => console.log(err));
-axios
-  .get(
-    `https://www.hikingproject.com/data/get-trails?lat=39.293126&lon=-76.615702&maxDistance=10&key=${process.env.REI_HIKING_API_KEY}`
-  )
-  .then(response =>
-    response.data.trails.forEach(trail => state.Baltimore.trails.push(trail))
-  )
-  .catch(err => console.log(err));
+// axios
+//   .get(
+//     `https://www.hikingproject.com/data/get-trails?lat=40.0274&lon=-105.2519&maxDistance=10&key=${process.env.REI_HIKING_API_KEY}`
+//   )
+//   .then(response =>
+//     response.data.trails.forEach(trail => state.Boulder.trails.push(trail))
+//   )
+//   .catch(err => console.log(err));
+// axios
+//   .get(
+//     `https://www.hikingproject.com/data/get-trails?lat=37.775592&lon=-122.417004&maxDistance=10&key=${process.env.REI_HIKING_API_KEY}`
+//   )
+//   .then(response =>
+//     response.data.trails.forEach(trail => state.Sanfran.trails.push(trail))
+//   )
+//   .catch(err => console.log(err));
+// axios
+//   .get(
+//     `https://www.hikingproject.com/data/get-trails?lat=39.293126&lon=-76.615702&maxDistance=10&key=${process.env.REI_HIKING_API_KEY}`
+//   )
+//   .then(response =>
+//     response.data.trails.forEach(trail => state.Baltimore.trails.push(trail))
+//   )
+//   .catch(err => console.log(err));
 
 const router = new Navigo(window.location.origin);
 
@@ -56,6 +56,7 @@ function render(st = state.Home) {
   listenForBoulderClick(st);
   listenForSanfranClick(st);
   listenForBaltimoreClick(st);
+  addSiteListeners(st);
 }
 
 function listenForBoulderClick(st) {
@@ -88,58 +89,59 @@ function listenForBaltimoreClick(st) {
 }
 
 function addSiteListeners(st) {
-  addLogInAndOutListener(state.User);
+  // addLogInAndOutListener(state.User);
   listenForAuthChange();
   addNavEventListeners();
   listenForRegister(st);
   listenForSignIn(st);
+  listenForSignOut(st);
 }
 
 // FUNCTIONS & EVENT LISTENERS
-function addLogInAndOutListener(user) {
-  // select link in header
-  document.querySelector("header a").addEventListener("click", event => {
-    // if user is logged in,
-    if (user.loggedIn) {
-      event.preventDefault();
-      // log out functionality
-      auth.signOut().then(() => {
-        console.log("user logged out");
-        logOutUserInDb(user.email);
-        resetUserInState();
-        //update user in database
-        coll.get;
-        render(state.Home);
-      });
-      console.log(state.User);
-    }
-    // if user is logged out, clicking the link will render sign in page (handled by <a>'s href)
-  });
-}
-function logOutUserInDb(email) {
-  if (state.User.loggedIn) {
-    db.collection("users")
-      .get()
-      .then(snapshot =>
-        snapshot.docs.forEach(doc => {
-          if (email === doc.data().email) {
-            let id = doc.id;
-            db.collection("users")
-              .doc(id)
-              .update({ signedIn: false });
-          }
-        })
-      );
-    console.log("user signed out in db");
-  }
-}
-function resetUserInState() {
-  state.User.username = "";
-  state.User.firstName = "";
-  state.User.lastName = "";
-  state.User.email = "";
-  state.User.loggedIn = false;
-}
+// function addLogInAndOutListener(user) {
+//   // select link in header
+//   document.querySelector("header a").addEventListener("click", event => {
+//     // if user is logged in,
+//     if (user.loggedIn) {
+//       event.preventDefault();
+//       // log out functionality
+//       auth.signOut().then(() => {
+//         console.log("user logged out");
+//         logOutUserInDb(user.email);
+//         resetUserInState();
+//         //update user in database
+//         coll.get;
+//         render(state.Home);
+//       });
+//       console.log(state.User);
+// }
+//     // if user is logged out, clicking the link will render sign in page (handled by <a>'s href)
+//   });
+// }
+// function logOutUserInDb(email) {
+//   if (state.User.loggedIn) {
+//     db.collection("users")
+//       .get()
+//       .then(snapshot =>
+//         snapshot.docs.forEach(doc => {
+//           if (email === doc.data().email) {
+//             let id = doc.id;
+//             db.collection("users")
+//               .doc(id)
+//               .update({ signedIn: false });
+//           }
+//         })
+//       );
+//     console.log("user signed out in db");
+//   }
+// }
+// function resetUserInState() {
+//   state.User.username = "";
+//   state.User.firstName = "";
+//   state.User.lastName = "";
+//   state.User.email = "";
+//   state.User.loggedIn = false;
+// }
 
 function listenForAuthChange() {
   // log user object from auth if a user is signed in
@@ -181,6 +183,7 @@ function listenForRegister(st) {
   }
 }
 function addUserToStateAndDb(first, last, email, pass) {
+  console.log(state);
   state.User.username = first + last;
   state.User.firstName = first;
   state.User.lastName = last;
@@ -211,9 +214,20 @@ function listenForSignIn(st) {
         console.log("user signed in");
         getUserFromDb(email).then(() => render(state.Home));
       });
+      render(state.Home);
     });
   }
 }
+
+function listenForSignOut(st) {
+  if (st.view === "Signout") {
+    document.querySelector("form").addEventListener("submit", event => {
+      event.preventDefault();
+    });
+    render(state.Home);
+  }
+}
+
 function getUserFromDb(email) {
   return db
     .collection("users")
