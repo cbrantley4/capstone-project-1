@@ -87,7 +87,7 @@ function addSiteListeners(st) {
   addNavEventListeners();
   listenForRegister(st);
   listenForSignIn(st);
-  listenForSignOut(st);
+  listenForSignOut(st, state.user);
 }
 
 // FUNCTIONS & EVENT LISTENERS
@@ -215,15 +215,20 @@ function listenForSignIn(st) {
   }
 }
 
-function listenForSignOut(st) {
+function listenForSignOut(st, user) {
   if (st.view === "Signout") {
     document.querySelector("form").addEventListener("submit", event => {
       event.preventDefault();
-      auth.signOut(user).then(() => {
-        console.log("user signed out");
-      });
+      auth()
+        .signOut()
+        .then(() => {
+          logOutUserInDb(user.email);
+          resetUserInState();
+          coll.get;
+          console.log("user logged out");
+          console.log(state.User);
+        });
     });
-    render(state.Home);
   }
 }
 
