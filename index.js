@@ -112,120 +112,11 @@ function addLogInAndOutListener(user) {
       // if user is logged out, clicking the link will render sign in page (handled by <a>'s href)
     });
   }
+}
 
-  function logOutUserInDb(email) {
-    if (state.User.loggedIn) {
-      db.collection("users")
-        .get()
-        .then(snapshot =>
-          snapshot.docs.forEach(doc => {
-            if (email === doc.data().email) {
-              let id = doc.id;
-              db.collection("users")
-                .doc(id)
-                .update({ signedIn: false });
-            }
-          })
-        );
-      console.log("user signed out in db");
-    }
-  }
-  function resetUserInState() {
-    state.User.username = "";
-    state.User.firstName = "";
-    state.User.lastName = "";
-    state.User.email = "";
-    state.User.loggedIn = false;
-  }
-
-  function listenForAuthChange() {
-    // log user object from auth if a user is signed in
-    auth.onAuthStateChanged(user => (user ? console.log(user) : ""));
-  }
-
-  function addNavEventListeners() {
-    // add menu toggle to bars icon in nav bar
-    document
-      .querySelector(".fa-bars")
-      .addEventListener("click", () =>
-        document.querySelector("nav > ul").classList.toggle("hidden--mobile")
-      );
-  }
-
-  function listenForRegister(st) {
-    if (st.view === "Register") {
-      document.querySelector("form").addEventListener("submit", event => {
-        event.preventDefault();
-        // convert HTML elements to Array
-        let inputList = Array.from(event.target.elements);
-        // remove submit button from list
-        inputList.pop();
-        const inputs = inputList.map(input => input.value);
-        let firstName = inputs[0];
-        let lastName = inputs[1];
-        let email = inputs[2];
-        let password = inputs[3];
-
-        //create user in Firebase
-        auth.createUserWithEmailAndPassword(email, password).then(response => {
-          console.log("user registered");
-          console.log(response);
-          console.log(response.user);
-          addUserToStateAndDb(firstName, lastName, email, password);
-          render(state.Home);
-        });
-      });
-    }
-  }
-  function addUserToStateAndDb(first, last, email, pass) {
-    console.log(state);
-    state.User.username = first + last;
-    state.User.firstName = first;
-    state.User.lastName = last;
-    state.User.email = email;
-    state.User.loggedIn = true;
-
-    coll.add({
-      firstName: first,
-      lastName: last,
-      email: email,
-      password: pass,
-      signedIn: true
-    });
-  }
-
-  function listenForSignIn(st) {
-    if (st.view === "Signin") {
-      document.querySelector("form").addEventListener("submit", event => {
-        event.preventDefault();
-        // convert HTML elements to Array
-        let inputList = Array.from(event.target.elements);
-        // remove submit button from list
-        inputList.pop();
-        const inputs = inputList.map(input => input.value);
-        let email = inputs[0];
-        let password = inputs[1];
-        auth.signInWithEmailAndPassword(email, password).then(() => {
-          console.log("user signed in");
-          getUserFromDb(email).then(() => render(state.Home));
-        });
-        render(state.Home);
-      });
-    }
-  }
-
-  function listenForSignOut(st) {
-    if (st.view === "Signout") {
-      document.querySelector("form").addEventListener("submit", event => {
-        event.preventDefault();
-      });
-      render(state.Home);
-    }
-  }
-
-  function getUserFromDb(email) {
-    return db
-      .collection("users")
+function logOutUserInDb(email) {
+  if (state.User.loggedIn) {
+    db.collection("users")
       .get()
       .then(snapshot =>
         snapshot.docs.forEach(doc => {
@@ -233,20 +124,133 @@ function addLogInAndOutListener(user) {
             let id = doc.id;
             db.collection("users")
               .doc(id)
-              .update({ signedIn: true });
-            console.log("user signed in in db");
-            let user = doc.data();
-            state.User.username = user.firstName + user.lastName;
-            state.User.firstName = user.firstName;
-            state.User.lastName = user.lastName;
-            state.User.email = email;
-            state.User.loggedIn = true;
-            console.log(state.User);
+              .update({ signedIn: false });
           }
         })
       );
+    console.log("user signed out in db");
   }
 }
+function resetUserInState() {
+  state.User.username = "";
+  state.User.firstName = "";
+  state.User.lastName = "";
+  state.User.email = "";
+  state.User.loggedIn = false;
+}
+
+function listenForAuthChange() {
+  // log user object from auth if a user is signed in
+  auth.onAuthStateChanged(user => (user ? console.log(user) : ""));
+}
+
+function addNavEventListeners() {
+  // add menu toggle to bars icon in nav bar
+  document
+    .querySelector(".fa-bars")
+    .addEventListener("click", () =>
+      document.querySelector("nav > ul").classList.toggle("hidden--mobile")
+    );
+}
+
+function listenForRegister(st) {
+  if (st.view === "Register") {
+    document.querySelector("form").addEventListener("submit", event => {
+      event.preventDefault();
+      // convert HTML elements to Array
+      let inputList = Array.from(event.target.elements);
+      // remove submit button from list
+      inputList.pop();
+      const inputs = inputList.map(input => input.value);
+      let firstName = inputs[0];
+      let lastName = inputs[1];
+      let email = inputs[2];
+      let password = inputs[3];
+
+      //create user in Firebase
+      auth.createUserWithEmailAndPassword(email, password).then(response => {
+        console.log("user registered");
+        console.log(response);
+        console.log(response.user);
+        addUserToStateAndDb(firstName, lastName, email, password);
+        render(state.Home);
+      });
+    });
+  }
+}
+function addUserToStateAndDb(first, last, email, pass) {
+  console.log(state);
+  state.User.username = first + last;
+  state.User.firstName = first;
+  state.User.lastName = last;
+  state.User.email = email;
+  state.User.loggedIn = true;
+
+  coll.add({
+    firstName: first,
+    lastName: last,
+    email: email,
+    password: pass,
+    signedIn: true
+  });
+}
+
+function listenForSignIn(st) {
+  if (st.view === "Signin") {
+    document.querySelector("form").addEventListener("submit", event => {
+      event.preventDefault();
+      // convert HTML elements to Array
+      let inputList = Array.from(event.target.elements);
+      // remove submit button from list
+      inputList.pop();
+      const inputs = inputList.map(input => input.value);
+      let email = inputs[0];
+      let password = inputs[1];
+      auth.signInWithEmailAndPassword(email, password).then(() => {
+        console.log("user signed in");
+        getUserFromDb(email).then(() => render(state.Home));
+      });
+      render(state.Home);
+    });
+  }
+}
+
+function listenForSignOut(st) {
+  if (st.view === "Signout") {
+    document.querySelector("form").addEventListener("submit", event => {
+      event.preventDefault();
+      auth.signOut(user).then(() => {
+        console.log("user signed out");
+      });
+    });
+    render(state.Home);
+  }
+}
+
+function getUserFromDb(email) {
+  return db
+    .collection("users")
+    .get()
+    .then(snapshot =>
+      snapshot.docs.forEach(doc => {
+        if (email === doc.data().email) {
+          let id = doc.id;
+          db.collection("users")
+            .doc(id)
+            .update({ signedIn: true });
+          console.log("user signed in in db");
+          let user = doc.data();
+          state.User.username = user.firstName + user.lastName;
+          state.User.firstName = user.firstName;
+          state.User.lastName = user.lastName;
+          state.User.email = email;
+          state.User.loggedIn = true;
+          console.log(state.User);
+        }
+      })
+    );
+}
+
 router
   .on({
     "/": () => render(state.Home),
