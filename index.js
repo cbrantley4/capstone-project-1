@@ -36,13 +36,6 @@ const coll = db.collection("users");
 
 const router = new Navigo(window.location.origin);
 
-router
-  .on({
-    "/": () => render(state.Home),
-    ":page": params => render(state[capitalize(params.page)])
-  })
-  .resolve();
-
 function render(st = state.Home) {
   document.querySelector("#root").innerHTML = `
   ${Header(st)}
@@ -89,7 +82,7 @@ function listenForBaltimoreClick(st) {
 }
 
 function addSiteListeners(st) {
-  // addLogInAndOutListener(state.User);
+  addLogInAndOutListener(state.User);
   listenForAuthChange();
   addNavEventListeners();
   listenForRegister(st);
@@ -98,156 +91,165 @@ function addSiteListeners(st) {
 }
 
 // FUNCTIONS & EVENT LISTENERS
-// function addLogInAndOutListener(user) {
-//   // select link in header
-//   document.querySelector("header a").addEventListener("click", event => {
-//     // if user is logged in,
-//     if (user.loggedIn) {
-//       event.preventDefault();
-//       // log out functionality
-//       auth.signOut().then(() => {
-//         console.log("user logged out");
-//         logOutUserInDb(user.email);
-//         resetUserInState();
-//         //update user in database
-//         coll.get;
-//         render(state.Home);
-//       });
-//       console.log(state.User);
-// }
-//     // if user is logged out, clicking the link will render sign in page (handled by <a>'s href)
-//   });
-// }
-// function logOutUserInDb(email) {
-//   if (state.User.loggedIn) {
-//     db.collection("users")
-//       .get()
-//       .then(snapshot =>
-//         snapshot.docs.forEach(doc => {
-//           if (email === doc.data().email) {
-//             let id = doc.id;
-//             db.collection("users")
-//               .doc(id)
-//               .update({ signedIn: false });
-//           }
-//         })
-//       );
-//     console.log("user signed out in db");
-//   }
-// }
-// function resetUserInState() {
-//   state.User.username = "";
-//   state.User.firstName = "";
-//   state.User.lastName = "";
-//   state.User.email = "";
-//   state.User.loggedIn = false;
-// }
+function addLogInAndOutListener(user) {
+  if (state.view === "Home") {
+    // select link in header
+    document.querySelector("header a").addEventListener("click", event => {
+      // if user is logged in,
+      if (user.loggedIn) {
+        event.preventDefault();
+        // log out functionality
+        auth.signOut().then(() => {
+          console.log("user logged out");
+          logOutUserInDb(user.email);
+          resetUserInState();
+          //update user in database
+          coll.get;
+          render(state.Home);
+        });
+        console.log(state.User);
+      }
+      // if user is logged out, clicking the link will render sign in page (handled by <a>'s href)
+    });
+  }
 
-function listenForAuthChange() {
-  // log user object from auth if a user is signed in
-  auth.onAuthStateChanged(user => (user ? console.log(user) : ""));
-}
+  function logOutUserInDb(email) {
+    if (state.User.loggedIn) {
+      db.collection("users")
+        .get()
+        .then(snapshot =>
+          snapshot.docs.forEach(doc => {
+            if (email === doc.data().email) {
+              let id = doc.id;
+              db.collection("users")
+                .doc(id)
+                .update({ signedIn: false });
+            }
+          })
+        );
+      console.log("user signed out in db");
+    }
+  }
+  function resetUserInState() {
+    state.User.username = "";
+    state.User.firstName = "";
+    state.User.lastName = "";
+    state.User.email = "";
+    state.User.loggedIn = false;
+  }
 
-function addNavEventListeners() {
-  // add menu toggle to bars icon in nav bar
-  document
-    .querySelector(".fa-bars")
-    .addEventListener("click", () =>
-      document.querySelector("nav > ul").classList.toggle("hidden--mobile")
-    );
-}
+  function listenForAuthChange() {
+    // log user object from auth if a user is signed in
+    auth.onAuthStateChanged(user => (user ? console.log(user) : ""));
+  }
 
-function listenForRegister(st) {
-  if (st.view === "Register") {
-    document.querySelector("form").addEventListener("submit", event => {
-      event.preventDefault();
-      // convert HTML elements to Array
-      let inputList = Array.from(event.target.elements);
-      // remove submit button from list
-      inputList.pop();
-      const inputs = inputList.map(input => input.value);
-      let firstName = inputs[0];
-      let lastName = inputs[1];
-      let email = inputs[2];
-      let password = inputs[3];
+  function addNavEventListeners() {
+    // add menu toggle to bars icon in nav bar
+    document
+      .querySelector(".fa-bars")
+      .addEventListener("click", () =>
+        document.querySelector("nav > ul").classList.toggle("hidden--mobile")
+      );
+  }
 
-      //create user in Firebase
-      auth.createUserWithEmailAndPassword(email, password).then(response => {
-        console.log("user registered");
-        console.log(response);
-        console.log(response.user);
-        addUserToStateAndDb(firstName, lastName, email, password);
+  function listenForRegister(st) {
+    if (st.view === "Register") {
+      document.querySelector("form").addEventListener("submit", event => {
+        event.preventDefault();
+        // convert HTML elements to Array
+        let inputList = Array.from(event.target.elements);
+        // remove submit button from list
+        inputList.pop();
+        const inputs = inputList.map(input => input.value);
+        let firstName = inputs[0];
+        let lastName = inputs[1];
+        let email = inputs[2];
+        let password = inputs[3];
+
+        //create user in Firebase
+        auth.createUserWithEmailAndPassword(email, password).then(response => {
+          console.log("user registered");
+          console.log(response);
+          console.log(response.user);
+          addUserToStateAndDb(firstName, lastName, email, password);
+          render(state.Home);
+        });
+      });
+    }
+  }
+  function addUserToStateAndDb(first, last, email, pass) {
+    console.log(state);
+    state.User.username = first + last;
+    state.User.firstName = first;
+    state.User.lastName = last;
+    state.User.email = email;
+    state.User.loggedIn = true;
+
+    coll.add({
+      firstName: first,
+      lastName: last,
+      email: email,
+      password: pass,
+      signedIn: true
+    });
+  }
+
+  function listenForSignIn(st) {
+    if (st.view === "Signin") {
+      document.querySelector("form").addEventListener("submit", event => {
+        event.preventDefault();
+        // convert HTML elements to Array
+        let inputList = Array.from(event.target.elements);
+        // remove submit button from list
+        inputList.pop();
+        const inputs = inputList.map(input => input.value);
+        let email = inputs[0];
+        let password = inputs[1];
+        auth.signInWithEmailAndPassword(email, password).then(() => {
+          console.log("user signed in");
+          getUserFromDb(email).then(() => render(state.Home));
+        });
         render(state.Home);
       });
-    });
+    }
   }
-}
-function addUserToStateAndDb(first, last, email, pass) {
-  console.log(state);
-  state.User.username = first + last;
-  state.User.firstName = first;
-  state.User.lastName = last;
-  state.User.email = email;
-  state.User.loggedIn = true;
 
-  coll.add({
-    firstName: first,
-    lastName: last,
-    email: email,
-    password: pass,
-    signedIn: true
-  });
-}
-
-function listenForSignIn(st) {
-  if (st.view === "Signin") {
-    document.querySelector("form").addEventListener("submit", event => {
-      event.preventDefault();
-      // convert HTML elements to Array
-      let inputList = Array.from(event.target.elements);
-      // remove submit button from list
-      inputList.pop();
-      const inputs = inputList.map(input => input.value);
-      let email = inputs[0];
-      let password = inputs[1];
-      auth.signInWithEmailAndPassword(email, password).then(() => {
-        console.log("user signed in");
-        getUserFromDb(email).then(() => render(state.Home));
+  function listenForSignOut(st) {
+    if (st.view === "Signout") {
+      document.querySelector("form").addEventListener("submit", event => {
+        event.preventDefault();
       });
       render(state.Home);
-    });
+    }
+  }
+
+  function getUserFromDb(email) {
+    return db
+      .collection("users")
+      .get()
+      .then(snapshot =>
+        snapshot.docs.forEach(doc => {
+          if (email === doc.data().email) {
+            let id = doc.id;
+            db.collection("users")
+              .doc(id)
+              .update({ signedIn: true });
+            console.log("user signed in in db");
+            let user = doc.data();
+            state.User.username = user.firstName + user.lastName;
+            state.User.firstName = user.firstName;
+            state.User.lastName = user.lastName;
+            state.User.email = email;
+            state.User.loggedIn = true;
+            console.log(state.User);
+          }
+        })
+      );
   }
 }
-
-function listenForSignOut(st) {
-  if (st.view === "Signout") {
-    document.querySelector("form").addEventListener("submit", event => {
-      event.preventDefault();
-    });
-    render(state.Home);
-  }
-}
-
-function getUserFromDb(email) {
-  return db
-    .collection("users")
-    .get()
-    .then(snapshot =>
-      snapshot.docs.forEach(doc => {
-        if (email === doc.data().email) {
-          let id = doc.id;
-          db.collection("users")
-            .doc(id)
-            .update({ signedIn: true });
-          console.log("user signed in in db");
-          let user = doc.data();
-          state.User.username = user.firstName + user.lastName;
-          state.User.firstName = user.firstName;
-          state.User.lastName = user.lastName;
-          state.User.email = email;
-          state.User.loggedIn = true;
-          console.log(state.User);
-        }
-      })
-    );
-}
+router
+  .on({
+    "/": () => render(state.Home),
+    ":page": params => render(state[capitalize(params.page)])
+  })
+  .resolve();
