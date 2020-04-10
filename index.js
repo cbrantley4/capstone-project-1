@@ -82,37 +82,38 @@ function listenForBaltimoreClick(st) {
 }
 
 function addSiteListeners(st) {
-  addLogInAndOutListener(state.User);
+  // addLogInAndOutListener(state.User);
   listenForAuthChange();
   addNavEventListeners();
   listenForRegister(st);
   listenForSignIn(st);
   listenForSignOut(st, state.user);
+  resetUserInState();
 }
 
 // FUNCTIONS & EVENT LISTENERS
-function addLogInAndOutListener(user) {
-  if (state.view === "Home") {
-    // select link in header
-    document.querySelector("header a").addEventListener("click", event => {
-      // if user is logged in,
-      if (user.loggedIn) {
-        event.preventDefault();
-        // log out functionality
-        auth.signOut().then(() => {
-          console.log("user logged out");
-          logOutUserInDb(user.email);
-          resetUserInState();
-          //update user in database
-          coll.get;
-          render(state.Home);
-        });
-        console.log(state.User);
-      }
-      // if user is logged out, clicking the link will render sign in page (handled by <a>'s href)
-    });
-  }
-}
+// function addLogInAndOutListener(user) {
+//   if (state.view === "Home") {
+//     // select link in header
+//     document.querySelector("header a").addEventListener("click", event => {
+//       // if user is logged in,
+//       if (user.loggedIn) {
+//         event.preventDefault();
+//         // log out functionality
+//         auth.signOut().then(() => {
+//           console.log("user logged out");
+//           logOutUserInDb(user.email);
+//           resetUserInState();
+//           //update user in database
+//           coll.get;
+//           render(state.Home);
+//         });
+//         console.log(state.User);
+//       }
+//       // if user is logged out, clicking the link will render sign in page (handled by <a>'s href)
+//     });
+//   }
+// }
 
 function logOutUserInDb(email) {
   if (state.User.loggedIn) {
@@ -219,15 +220,14 @@ function listenForSignOut(st, user) {
   if (st.view === "Signout") {
     document.querySelector("form").addEventListener("submit", event => {
       event.preventDefault();
-      auth()
-        .signOut()
-        .then(() => {
-          logOutUserInDb(user.email);
-          resetUserInState();
-          coll.get;
-          console.log("user logged out");
-          console.log(state.User);
-        });
+      auth.signOut().then(() => {
+        //update user in database
+        logOutUserInDb(user);
+        resetUserInState();
+        coll.get;
+        console.log("user logged out");
+        console.log(state.User);
+      });
     });
   }
 }
