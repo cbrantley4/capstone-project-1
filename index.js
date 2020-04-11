@@ -223,7 +223,6 @@ function listenForSignOut(st, user) {
       auth.signOut().then(() => {
         //update user in database
         logOutUserInDb(user);
-        resetUserInState();
         coll.get;
         console.log("user logged out");
         console.log(state.User);
