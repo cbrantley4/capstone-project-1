@@ -1,7 +1,7 @@
 export default () => `
 <section id="PageE">
   <h1>Search other cities for a running or walking trail:</h1>
-  <img src="https://images.unsplash.com/photo-1532117892888-38948e152b3a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60">
+  <img src="https://images.unsplash.com/photo-1532117892888-38948e152b3a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" attribute="SameSite">
   <ul>
     <li><a id="boulder-link" href="Newcity/Boulder" data-navigo>Boulder, CO</a></li>
     <li><a id="sanfran-link" href="Newcity/Sanfran" data-navigo>San Francisco, CA</a></li>
