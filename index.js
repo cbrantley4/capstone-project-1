@@ -83,7 +83,7 @@ function listenForBaltimoreClick(st) {
 
 function addSiteListeners(st) {
   // addLogInAndOutListener(state.User);
-  // listenForAuthChange();
+  listenForAuthChange();
   addNavEventListeners();
   listenForRegister(st);
   listenForSignIn(st);
@@ -139,10 +139,10 @@ function resetUserInState() {
   state.User.loggedIn = false;
 }
 
-// function listenForAuthChange() {
-//   // log user object from auth if a user is signed in
-//   auth.onAuthStateChanged(user => (user ? console.log(user) : ""));
-// }
+function listenForAuthChange() {
+  // log user object from auth if a user is signed in
+  auth.onAuthStateChanged(user => (user ? console.log(user) : ""));
+}
 
 function addNavEventListeners() {
   // add menu toggle to bars icon in nav bar
