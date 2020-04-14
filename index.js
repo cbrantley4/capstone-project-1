@@ -88,7 +88,6 @@ function addSiteListeners(st) {
   listenForRegister(st);
   listenForSignIn(st);
   listenForSignOut(st, state.user);
-  resetUserInState();
 }
 
 // FUNCTIONS & EVENT LISTENERS
@@ -225,6 +224,7 @@ function listenForSignOut(st, user) {
         logOutUserInDb(user);
         coll.get;
         console.log("user logged out");
+        resetUserInState();
         console.log(state.User);
       });
     });
