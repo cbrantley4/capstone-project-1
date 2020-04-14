@@ -225,7 +225,8 @@ function listenForSignOut(st, user) {
         coll.get;
         console.log("user logged out");
         resetUserInState();
-        console.log(state.User);
+        // console.log(state.User);
+        render(state.Home);
       });
     });
   }
