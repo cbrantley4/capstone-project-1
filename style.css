@@ -37,19 +37,19 @@ header {
   color: Green;
   font-weight: bold;
   text-align: center;
-  font-size: 40px;
+  font-size: 20px;
 }
 #PageC h1 {
   color: Blue;
   font-weight: bold;
   text-align: center;
-  font-size: 40px;
+  font-size: 20px;
 }
 #PageD h1 {
   color: Red;
   font-weight: bold;
   text-align: center;
-  font-size: 40px;
+  font-size: 20px;
 }
 #PageE h1 {
   color: Black;
@@ -133,4 +133,16 @@ button {
 
 #Register img {
   height: 90%;
+}
+
+#Boulder h1 {
+  text-align: center;
+}
+
+#Baltimore h1 {
+  text-align: center;
+}
+
+#Sanfran h1 {
+  text-align: center;
 }

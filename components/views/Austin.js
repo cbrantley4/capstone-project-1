@@ -1,6 +1,7 @@
 export default () => `
 <section id="PageC">
     <nav>
+      <h1>Austin, TX</h1>
       <img src = "https://images.unsplash.com/photo-1561958867-e77582c2dc39?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=755&q=80">
         <ul>
           <p>What distance trail would you like to run or walk?</p>
